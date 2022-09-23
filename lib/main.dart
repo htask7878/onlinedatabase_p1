@@ -210,19 +210,12 @@ class _homeState extends State<home> {
                       var response = await http.get(url);
                       print('Response body: ${response.body}');
 
-                      // Map  m=jsonDecode(response.body);
-                      // print(m['cat_type']);
-                      // print(m['cat_name']);
-                      // print(m['cat_description']);
-                      // print(m['cat_qty']);
-
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return second();
-                        },
-                      ));
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) {
+                      //     return second();
+                      //   },
+                      // ));
                       setState(() {});
-
                       t1.text = "";
                       t2.text = "";
                       t3.text = "";
@@ -231,7 +224,27 @@ class _homeState extends State<home> {
                       "submit",
                       style: TextStyle(
                           fontSize: 18, letterSpacing: 1, color: Colors.white),
-                    ))
+                    )),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(200, 45),
+                        onPrimary: Colors.purpleAccent,
+                        primary: Color(0xff4d4d4d)),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return second();
+                        },
+                      ));
+                    },
+                    child: Text(
+                      "View Data",
+                      style: TextStyle(
+                          fontSize: 18, letterSpacing: 1, color: Colors.white),
+                    )),
               ],
             ),
           ),

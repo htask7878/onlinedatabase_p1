@@ -12,25 +12,15 @@ class second extends StatefulWidget {
 
 class _secondState extends State<second> {
   List map = [];
-  List del = [];
-  bool f = false;
-  user u = user();
 
   Future viewdata() async {
     var url =
-        Uri.parse('https://pdfile7.000webhostapp.com/firstdata/viewdata1.php');
+        Uri.parse('https://pdfile7.000webhostapp.com/firstdata/viewdata1.php?');
     var response = await http.get(url);
     print(response.body);
     map = jsonDecode(response.body);
   }
 
- // Future deletedata() async {
- //    var url = Uri.parse(
- //        'https://pdfile7.000webhostapp.com/firstdata/deletedata1.php?id=${u.id}');
- //    var response = await http.delete(url);
- //    print(response.body);
- //    return del = jsonDecode(response.body);
- //  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,39 +71,32 @@ class _secondState extends State<second> {
                                             children: [
                                               Text("Are shure!!."),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
+                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                 children: [
-                                                  FutureBuilder(
-                                                    future: viewdata(),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      if (snapshot.connectionState == ConnectionState.done) {
-                                                        return TextButton(onPressed: () async {
-                                                          var url = Uri.parse(
-                                                              'https://pdfile7.000webhostapp.com/firstdata/deletedata1.php?id=${u.id}');
-                                                          var response = await http.delete(url);
-                                                          print(response.body);
+                                                  TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                              fixedSize: Size(70, 30),
+                                                              onSurface: Colors.purpleAccent,
+                                                              primary: Colors.green),
+                                                      onPressed: () async {
+                                                        var url = Uri.parse(
+                                                            'https://pdfile7.000webhostapp.com/firstdata/deletedata1.php?id=${u.id}');
+                                                        var response = await http.get(url);
+                                                        print(response.body);
 
-                                                         print("\n\nHarik\n\n");
-                                                          Navigator.pop(context);
-                                                          setState(() {});
-                                                        }, child: Text("Delete"));
-                                                      } else {
-                                                        return CircularProgressIndicator();
-                                                      }
-                                                    },
-                                                  ),
+                                                        print("\n\nHarik\n\n");
+                                                        Navigator.pop(context);
+                                                        setState(() {});
+                                                      },
+                                                      child: Text("Delete")),
                                                   TextButton(
                                                       style:
                                                           TextButton.styleFrom(
                                                               fixedSize:
                                                                   Size(70, 30),
-                                                              onSurface: Colors
-                                                                  .purpleAccent,
-                                                              primary:
-                                                                  Colors.green),
+                                                              onSurface: Colors.purpleAccent,
+                                                              primary: Colors.green),
                                                       onPressed: () {
                                                         Navigator.pop(context);
                                                       },
@@ -149,11 +132,7 @@ class _secondState extends State<second> {
                               ),
                             );
                           },
-                          // separatorBuilder: (context, index) => Divider(
-                          //       height: 20,
-                          //       thickness: 10,
-                          //       color: Colors.grey[100],
-                          //     ),
+
                           itemCount: map.length);
                     } else {
                       return Center(
@@ -170,50 +149,3 @@ class _secondState extends State<second> {
     );
   }
 }
-/*
-ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text("Name:",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("${u.name}"),
-                                    ],
-                                  ),
-                                ),
-                                ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text("Type :",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("${u.type}"),
-                                    ],
-                                  ),
-                                ),
-                                ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text("Description :",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("${u.description}",),
-                                    ],
-                                  ),
-                                ),
-                                ListTile(
-                                  title: Row(
-                                    children: [
-                                      Text("Minimum Qty :",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold)),
-                                      Text(" ${u.qty}"),
-                                    ],
-                                  ),
-                                ),
- */
-//cat_type=vegan&cat_name=Fruits&cat_description=test&cat_qty=5
