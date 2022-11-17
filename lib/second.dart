@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:onlinedatabase_p1/update.dart';
 
 import 'user.dart';
 
@@ -14,20 +15,16 @@ class _secondState extends State<second> {
   List map = [];
 
   Future viewdata() async {
-    var url =
-        Uri.parse('https://pdfile7.000webhostapp.com/firstdata/viewdata1.php?');
+    var url = Uri.parse('https://pdfile7.000webhostapp.com/firstdata/viewdata1.php?');
     var response = await http.get(url);
     print(response.body);
     map = jsonDecode(response.body);
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffd9d9d9),
-      body: SafeArea(
-        top: true,
+      body: SafeArea(top: true,
         child: Container(
           margin: EdgeInsets.only(right: 6, left: 6),
           child: Column(
@@ -58,77 +55,61 @@ class _secondState extends State<second> {
                                   color: Colors.white,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(7))),
-                              child: InkWell(
-                                onLongPress: () {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return SimpleDialog(
-                                        elevation: 10,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Text("Are shure!!."),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                              fixedSize: Size(70, 30),
-                                                              onSurface: Colors.purpleAccent,
-                                                              primary: Colors.green),
-                                                      onPressed: () async {
-                                                        var url = Uri.parse(
-                                                            'https://pdfile7.000webhostapp.com/firstdata/deletedata1.php?id=${u.id}');
-                                                        var response = await http.get(url);
-                                                        print(response.body);
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    trailing: Text("${u.id}"),
+                                    title: Text("Name: ${u.name}"),
+                                  ),
+                                  ListTile(
+                                    title: Text("Type: ${u.type}"),
+                                  ),
+                                  ListTile(
+                                    title:
+                                        Text("description: ${u.description}"),
+                                  ),
+                                  ListTile(
+                                    title: Text("Minimum Qty: ${u.qty}"),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ElevatedButton(style: ElevatedButton.styleFrom(
+                                          fixedSize: Size(100, 40),
+                                          onPrimary: Colors.purpleAccent,
+                                          primary: Color(0xff4d4d4d)),onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                          return update();
+                                        },));
+                                      },  child: Text("Update",style: TextStyle(color: Colors.white,fontSize: 15, letterSpacing: 1),)),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              fixedSize: Size(100, 40),
+                                              onPrimary: Colors.purpleAccent,
+                                              primary: Color(0xff4d4d4d)),
+                                          onPressed: () async {
+                                            var url = Uri.parse(
+                                                'https://pdfile7.000webhostapp.com/firstdata/deletedata1.php?id=${u.id}');
+                                            var response = await http.get(url);
+                                            print(response.body);
+                                            if(response.body=="One Row Delete Data")
+                                            {
+                                              viewdata();
+                                            }
+                                            setState(() {});
+                                          },
+                                          child: Text(
+                                            "Delete",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                letterSpacing: 1),
+                                          )),
 
-                                                        print("\n\nHarik\n\n");
-                                                        Navigator.pop(context);
-                                                        setState(() {});
-                                                      },
-                                                      child: Text("Delete")),
-                                                  TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                              fixedSize:
-                                                                  Size(70, 30),
-                                                              onSurface: Colors.purpleAccent,
-                                                              primary: Colors.green),
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text("Cancel")),
-                                                ],
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                        title: Text("Delete your data"),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      title: Text("Name: ${u.name}"),
-                                    ),
-                                    ListTile(
-                                      title: Text("Type: ${u.type}"),
-                                    ),
-                                    ListTile(
-                                      title:
-                                          Text("description: ${u.description}"),
-                                    ),
-                                    ListTile(
-                                      title: Text("Minimum Qty: ${u.qty}"),
-                                    )
-                                  ],
-                                  // backgroundColor: c,
-                                ),
+                                    ],
+                                  ),
+                                ],
+                                // backgroundColor: c,
                               ),
                             );
                           },
