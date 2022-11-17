@@ -40,7 +40,7 @@ class _secondState extends State<second> {
                 decoration: BoxDecoration(
                     color: Color(0xff4d4d4d),
                     borderRadius: BorderRadius.all(Radius.circular(4))),
-              ),
+              ),//
               Expanded(
                 child: FutureBuilder(
                   future: viewdata(),
