@@ -39,7 +39,7 @@ class _updateState extends State<update> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Ink(
-                  child: Center(
+                  child: Center(//
                       child: Text(
                     "Update CATEGORY",
                     style: TextStyle(color: Colors.white, fontSize: 17),
