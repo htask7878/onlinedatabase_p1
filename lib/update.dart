@@ -26,15 +26,6 @@ class _updateState extends State<update> {
     map =jsonDecode(response.body);
     // return map;
   }
-//
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   t1.text;
-  //   t2.text;
-  //   t3.text;
-  //   type;
-  // }
 
   @override
   Widget build(BuildContext context) {
